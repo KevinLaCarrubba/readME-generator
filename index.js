@@ -4,8 +4,7 @@ const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-const questions = () => {
-  return inquirer.prompt([
+const questions = [
     {
       type: "input",
       name: "userName",
@@ -46,26 +45,23 @@ const questions = () => {
       name: "addToRepo",
       message: "How can the user method to contribute to this repo:",
     },
-  ]);
-};
+  ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
   var fileName = fileName;
   data = generateMarkdown(data);
-  fs.writeFile(fileName, data);
+  fs.writeFile(fileName, data , (err) => 
+  err ? console.log(err) : console.log("Generating README.md ..."));
 }
 
 // TODO: Create a function to initialize app
 function init() {
-  questions().then((data) => {
-    console.log(data);
-    let print = writeToFile("README.md", data);
-    console.log(print);
-    fs.writeFile(print, (err) =>
-      err ? console.log(err) : console.log("Generating README.md ...")
-    );
-  });
+  inquirer
+  .prompt(questions) 
+  .then((data) =>
+  console.log(data))
+  
 }
 
 // Function call to initialize app
