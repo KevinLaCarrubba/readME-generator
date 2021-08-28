@@ -24,6 +24,7 @@
   
   Copy and paste
       
+      git clone https://github.com/KevinLaCarrubba/readME-generator.git
       npm install inquirer
   
   
